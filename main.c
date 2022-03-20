@@ -12,13 +12,14 @@ int main()
          0,
          10,
          5,
-         -5};
+         -5,
+         -1};
      int arr_length = 9;
-     int triplets[72];
+     int triplets[25] = {};
 
      findTriplets(array, arr_length, triplets);
      printf("Triplets that in sum give \"0\" are: \n ");
-     for (int i = 0; i < arr_length; i++)
+     for (int i = 0; i < 20; i++)
      {
           printf("%d", triplets[i]);
      }
