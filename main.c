@@ -1,33 +1,35 @@
 #include <stdio.h>
+#include "main.h"
 
-int binary_search(int arr[], int element, int lower, int higher)
+int main()
 {
-
+     int arr[] = {1, 2, 4, 23, 57, 94, 123, 444, 553};
+     int arr_length = sizeof(arr) / sizeof(arr[0]);
+     int x = 57;
+     int pos = binary_search(arr, 0, arr_length - 1, x);
+     printf("The number of elements with value %d is - %d\n", x, pos);
+     return 0;
+}
+int binary_search(int arr[], int lower, int higher, int x)
+{
      while (lower <= higher)
      {
-          int middle = lower + (higher - lower) / 2;
-          if (arr[middle] == element)
+          int middle = lower + (lower + higher) / 2;
+
+          if (arr[middle] == x)
           {
                return middle;
           }
-          if (arr[middle] > element)
+          else if (arr[middle] > x)
           {
-               higher = middle + 1;
+               lower = middle + 1;
+               return binary_search(arr, lower, higher - 1, x);
           }
           else
           {
-               lower = middle - 1;
+               higher = middle - 1;
+               return binary_search(arr, lower, higher - 1, x);
           }
      }
      return -1;
-}
-
-int main(void)
-{
-     int arr[] = {1, 3, 5, 12, 34, 41, 60, 88};
-     int arr_length = sizeof(arr) / sizeof(arr[0]);
-     int element = 12;
-     int pos = binary_search(arr, element, 0, arr_length - 1);
-     printf("The number of element with value %d is - %d\n", element, pos);
-     return 0;
 }
