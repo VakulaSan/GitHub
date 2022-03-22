@@ -3,33 +3,28 @@
 
 int main()
 {
-     int arr[] = {1, 2, 4, 23, 57, 94, 123, 444, 553};
+     int arr[] = {1, 3, 2, 1024, 3, 23, 54, 342, 22, 42, 51};
      int arr_length = sizeof(arr) / sizeof(arr[0]);
-     int x = 57;
-     int pos = binary_search(arr, 0, arr_length - 1, x);
-     printf("The number of elements with value %d is - %d\n", x, pos);
+     int pos = biggest_value(arr, arr_length);
+     printf("The largest element in array is - \"%d\".", pos);
      return 0;
 }
-int binary_search(int arr[], int lower, int higher, int x)
+int biggest_value(int arr[], int arr_length)
 {
-     while (lower <= higher)
+     int left = 0,
+         right = arr_length - 1;
+     /* when there is left one element, it means right - left = 0*/
+     while (right - left)
      {
-          int middle = lower + (lower + higher) / 2;
-
-          if (arr[middle] == x)
+          if (arr[left] > arr[right])
           {
-               return middle;
-          }
-          else if (arr[middle] > x)
-          {
-               lower = middle + 1;
-               return binary_search(arr, lower, higher - 1, x);
+               --right;
           }
           else
           {
-               higher = middle - 1;
-               return binary_search(arr, lower, higher - 1, x);
+               ++left;
           }
      }
-     return -1;
+     /* It does not matter what we will return left or right because they are equal*/
+     return left;
 }

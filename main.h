@@ -1,1 +1,1 @@
-int binary_search(int *, int, int, int);
+int biggest_value(int arr[], int arr_length);
