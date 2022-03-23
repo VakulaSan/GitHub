@@ -3,20 +3,33 @@
 
 int main()
 {
-     int arr[] = {1, 3, 2, 3, 166};
+     int arr[] = {1, 2, 3, 4, 5};
      int arr_length = sizeof(arr) / sizeof(arr[0]);
-     int max = biggest_value(arr, arr_length);
-     printf("The largest element in array is - \"%d\".", max);
-     return 0;
-}
-int biggest_value(int arr[], int arr_length)
-{
-     int max = arr[0];
+     rotate(arr, arr_length);
+     printf("Reverterd order is:\n\"");
      for (int i = 0; i < arr_length; i++)
      {
-          if (arr[i] > max)
-               max = arr[i];
+          printf("%d\"", arr[i]);
      }
 
-     return max;
+     return 0;
+}
+
+void rotate(int arr[], int arr_length)
+{
+
+     int i = 0;
+     int j = arr_length - 1;
+     while (i != j)
+     {
+          /* we can do it either swap(&arr[i],&arr[j])*/
+          swap(arr + i, arr + j);
+          ++i;
+     }
+}
+void swap(int *l, int *h)
+{
+     int temp = *l;
+     *l = *h;
+     *h = temp;
 }

@@ -1,1 +1,2 @@
-int biggest_value(int arr[], int arr_length);
+void rotate(int *, int);
+void swap(int *, int *);
