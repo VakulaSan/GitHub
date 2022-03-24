@@ -1,54 +1,59 @@
 #include <stdio.h>
-#include "main.h"
+#include <stdlib.h>
 
-int main()
+struct Stack
 {
+     int top;
+     int capacity;
+     int *array;
+};
 
-     int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-     int arr_length = sizeof(arr) / sizeof(arr[0]);
-     int k = 3;
-     reverse_in_groups(arr, arr_length, k);
-     printf("The reversed order is :\" ");
-     for (int i = 0; i < arr_length; i++)
-     {
-          printf("%d\"", arr[i]);
-     }
-
-     return 0;
+struct Stack *createStack(unsigned capacity)
+{
+     struct Stack *stack = (struct Stack *)malloc(sizeof(struct Stack));
+     stack->top = -1;
+     stack->capacity = capacity;
+     stack->array = (int *)malloc(stack->capacity * sizeof(int));
+     return stack;
 }
-void reverse_in_groups(int arr[], int arr_length, int k)
-{
-     int start,
-         stop;
 
-     if (k == 1)
+int isFull(struct Stack *stack)
+{
+     return stack->top == stack->capacity - 1;
+}
+int isEmpty(struct Stack *stack)
+{
+     return stack->top == -1;
+}
+
+void push(struct Stack *stack, int item)
+{
+     if (isFull(stack))
      {
           return;
      }
-     else if (k >= arr_length)
-     {
-          start = 0;
-          stop = arr_length - 1;
-          reverse(arr, start, stop);
-     }
-     else if (k < arr_length)
-     {
-          start = 0;
-          stop = k - 1;
-          reverse(arr, start, stop);
-          start = k;
-          stop = arr_length - 1;
-          reverse(arr, start, stop);
-     }
+     stack->array[++stack->top] = item;
+     printf("%d pushed on stack.\n", item);
 }
 
-void reverse(int arr[], int start, int stop)
+int pop(struct Stack *stack)
 {
-     int tmp;
-     for (; start < stop; start++, stop--)
+     if (isEmpty(stack))
      {
-          tmp = arr[start];
-          arr[start] = arr[stop];
-          arr[stop] = tmp;
+          return 1;
      }
+     return stack->array[stack->top--];
+}
+int main()
+{
+     struct Stack *stack = createStack(100);
+     push(stack, 10);
+     push(stack, 20);
+     push(stack, 30);
+     for (size_t i = 0; i < 3; i++)
+     {
+          printf("%d\n", pop(stack));
+     }
+
+     return 0;
 }
