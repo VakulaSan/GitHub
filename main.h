@@ -1,2 +1,2 @@
-void rotate(int *, int);
-void swap(int *, int *);
+void reverse_in_groups(int *, int, int);
+void reverse(int *, int, int);

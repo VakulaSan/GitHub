@@ -3,10 +3,12 @@
 
 int main()
 {
-     int arr[] = {1, 2, 3, 4, 5};
+
+     int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
      int arr_length = sizeof(arr) / sizeof(arr[0]);
-     rotate(arr, arr_length);
-     printf("Reverterd order is:\n\"");
+     int k = 3;
+     reverse_in_groups(arr, arr_length, k);
+     printf("The reversed order is :\" ");
      for (int i = 0; i < arr_length; i++)
      {
           printf("%d\"", arr[i]);
@@ -14,22 +16,39 @@ int main()
 
      return 0;
 }
-
-void rotate(int arr[], int arr_length)
+void reverse_in_groups(int arr[], int arr_length, int k)
 {
+     int start,
+         stop;
 
-     int i = 0;
-     int j = arr_length - 1;
-     while (i != j)
+     if (k == 1)
      {
-          /* we can do it either swap(&arr[i],&arr[j])*/
-          swap(arr + i, arr + j);
-          ++i;
+          return;
+     }
+     else if (k >= arr_length)
+     {
+          start = 0;
+          stop = arr_length - 1;
+          reverse(arr, start, stop);
+     }
+     else if (k < arr_length)
+     {
+          start = 0;
+          stop = k - 1;
+          reverse(arr, start, stop);
+          start = k;
+          stop = arr_length - 1;
+          reverse(arr, start, stop);
      }
 }
-void swap(int *l, int *h)
+
+void reverse(int arr[], int start, int stop)
 {
-     int temp = *l;
-     *l = *h;
-     *h = temp;
+     int tmp;
+     for (; start < stop; start++, stop--)
+     {
+          tmp = arr[start];
+          arr[start] = arr[stop];
+          arr[stop] = tmp;
+     }
 }
